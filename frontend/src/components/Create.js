@@ -7,7 +7,17 @@ import MyMultilineTextField from './forms/MyMultilineTextField'
 import { useForm } from 'react-hook-form'
 
 function Create() {
-  const {handleSubmit, reset, setValue, control} = useForm()
+
+
+const defaultValues = {
+  name:'',
+  comments:'',
+  status:'',
+  
+  
+}
+
+  const {handleSubmit, reset, setValue, control} = useForm({defaultValues: defaultValues})
   const submission = (data) => console.log(data)
   return (
     <div>
