@@ -5,7 +5,8 @@ import MyDatePickerField from './forms/MyDatepickerField'
 import MySelectField from './forms/MySelectField'
 import MyMultilineTextField from './forms/MyMultilineTextField'
 import { useForm } from 'react-hook-form'
-
+import AxiosInstance from './Axios'
+import Dayjs from 'dayjs'
 function Create() {
 
 
@@ -18,7 +19,18 @@ const defaultValues = {
 }
 
   const {handleSubmit, reset, setValue, control} = useForm({defaultValues: defaultValues})
-  const submission = (data) => console.log(data)
+  const submission = (data) => {
+    const StartDate = Dayjs(data.start_date["$d"]).format("YYYY-MM-DD")
+    const EndDate = Dayjs(data.end_date["$d"]).format("YYYY-MM-DD")
+    AxiosInstance.post(`project/`,{
+          name : data.name,
+          comments : data.comments,
+          status : data.status,
+          start_date : StartDate,
+          end_date : EndDate,
+        }
+    )
+  }
   return (
     <div>
 
