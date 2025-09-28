@@ -7,9 +7,10 @@ import MyMultilineTextField from './forms/MyMultilineTextField'
 import { useForm } from 'react-hook-form'
 import AxiosInstance from './Axios'
 import Dayjs from 'dayjs'
+import {useNavigate} from 'react-router-dom'
 function Create() {
 
-
+const navigate = useNavigate()
 const defaultValues = {
   name:'',
   comments:'',
@@ -29,7 +30,10 @@ const defaultValues = {
           start_date : StartDate,
           end_date : EndDate,
         }
-    )
+    ).then((res)=>{
+      navigate(`/`)
+
+    })
   }
   return (
     <div>
