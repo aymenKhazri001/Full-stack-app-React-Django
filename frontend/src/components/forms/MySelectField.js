@@ -7,12 +7,7 @@ import { Controller } from 'react-hook-form';
 
 export default function MySelectField(props) {
     const {label,width,  name, control}= props
-  const [age, setAge] = React.useState('');
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
+ 
   return (
  
       
