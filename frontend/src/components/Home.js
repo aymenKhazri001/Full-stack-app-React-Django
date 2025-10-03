@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react"
 import Dayjs from "dayjs";
 import { Box,IconButton } from "@mui/material";
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
-
+import {Link} from 'react-router-dom'
 import {
   MaterialReactTable,
   
@@ -63,7 +63,7 @@ useEffect(()=>{
     [],
   );
 
-  
+  console.log(myData)
   
   return (
     <div>
@@ -71,11 +71,14 @@ useEffect(()=>{
        columns={columns}
         data={myData}
         enableRowActions
-      renderRowActions={() => (
-        <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: '8px' }}>
+      renderRowActions={({row}) => (
+        <Box sx={{ display: 'flex',
+         flexWrap: 'nowrap',
+          gap: '8px' }}>
           <IconButton
             color="secondary"
-            
+            component={Link} 
+            to={`edit/${row.original.id}`}
           >
             <EditIcon />
           </IconButton>

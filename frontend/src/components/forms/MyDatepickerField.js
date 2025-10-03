@@ -16,7 +16,8 @@ export default function MyDatePickerField(props) {
        
            render={
              ({field : {onChange , value }}) => (
-               <DatePicker sx={{width:{width}}} onChange={onChange}
+               <DatePicker sx={{width:{width}}} 
+               onChange={(newValue) => onChange(newValue)}
             value={value} label={label} />
 
 
