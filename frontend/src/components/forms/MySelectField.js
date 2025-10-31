@@ -33,6 +33,7 @@ export default function MySelectField(props) {
           <MenuItem value="open">Open</MenuItem>
           <MenuItem value="in progress">In Progress</MenuItem>
           <MenuItem value="completed">Completed</MenuItem>
+          <MenuItem value="programmed">Programmed</MenuItem>
         </Select>
         
                 

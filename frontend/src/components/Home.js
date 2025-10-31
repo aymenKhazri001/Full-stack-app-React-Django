@@ -71,6 +71,11 @@ useEffect(()=>{
        columns={columns}
         data={myData}
         enableRowActions
+        muiTableBodyRowProps={({ row }) => ({
+            sx: {
+              backgroundColor: row.index % 2 === 0 ? "#f5f5f5" : "#ffffff", // Zebra striping
+            },
+          })}
       renderRowActions={({row}) => (
         <Box sx={{ display: 'flex',
          flexWrap: 'nowrap',
@@ -85,6 +90,8 @@ useEffect(()=>{
 
           <IconButton
             color="error"
+            component={Link} 
+            to={`delete/${row.original.id}`}
            
           >
             <DeleteIcon />

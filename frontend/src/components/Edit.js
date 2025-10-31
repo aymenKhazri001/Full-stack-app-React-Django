@@ -12,6 +12,7 @@ import {useNavigate, useParams} from 'react-router-dom'
 
 function Edit() {
 const MyParam = useParams()
+console.log(MyParam)
 const MyId = MyParam.id
 const [loading, setLoading] = useState(true);
 
@@ -63,7 +64,7 @@ const defaultValues = {
 
       <Box sx={{display:"flex", width:'100%', backgroundColor: "#000f", marginBottom:'10px'}}>
         <Typography sx={{marginLeft:'20px', color:'#ffffff'}}>
-          Create records
+          Update records
         </Typography>
       </Box>
 
