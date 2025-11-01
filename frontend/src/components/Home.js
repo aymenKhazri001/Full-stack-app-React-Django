@@ -9,6 +9,7 @@ import {
   
 } from 'material-react-table';
 
+
 function Home() {
 
   const [myData, setMyData]  = useState()
@@ -27,6 +28,7 @@ function Home() {
 useEffect(()=>{
   GetData()
 },[])
+
 
 
 
@@ -50,6 +52,11 @@ useEffect(()=>{
         size: 200,
       },
       {
+        accessorKey: 'PM_name', //normal accessorKey
+        header: 'Project Manager',
+        size: 200,
+      },
+      {
         accessorFn: (row)=> Dayjs(row.start_date).format('DD-MM-YYYY'),
         header: 'Start_date',
         size: 150,
@@ -63,7 +70,7 @@ useEffect(()=>{
     [],
   );
 
-  console.log(myData)
+  
   
   return (
     <div>

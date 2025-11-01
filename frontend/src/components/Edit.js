@@ -4,6 +4,7 @@ import MyTextField from './forms/MyTextField'
 import MyDatePickerField from './forms/MyDatepickerField'
 import MySelectField from './forms/MySelectField'
 import MyMultilineTextField from './forms/MyMultilineTextField'
+import MySelectFieldPM from './forms/MySelectFieldPM'
 import { useForm } from 'react-hook-form'
 import AxiosInstance from './Axios'
 import Dayjs from 'dayjs'
@@ -22,7 +23,7 @@ const GetData = ()=>{
       setValue('name', res.data.name)
       setValue('status', res.data.status)
       setValue('comments', res.data.comments)
-    
+      setValue('project_manager', res.data.project_manager)
       setValue('start_date', Dayjs(res.data.start_date))
       setValue('end_date', Dayjs(res.data.end_date))
       setLoading(false)
@@ -49,6 +50,7 @@ const defaultValues = {
           name : data.name,
           comments : data.comments,
           status : data.status,
+          project_manager : data.project_manager,
           start_date : StartDate,
           end_date : EndDate,
         }
@@ -113,14 +115,21 @@ const defaultValues = {
             control={control}
             >
               </MySelectField>
+               <MySelectFieldPM
+                          width='30%'
+                          label="Project Manager"
+                          name="project_manager"
+                          control={control}
+                          >
+                            </MySelectFieldPM>
 
-            <Box sx={{width:'30%'}} >
-              <Button variant="contained" type='submit' tx={{width:"100%"}} >
+
+        </Box>
+           <Box sx={{display:"flex", justifyContent:"center", marginTop : '40px' } } >
+              <Button variant="contained" type='submit' sx={{width:"30%"}} >
                 Submit
               </Button>
               </Box>
-
-        </Box>
        
 
       </Box>
