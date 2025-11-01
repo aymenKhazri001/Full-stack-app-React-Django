@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Controller } from 'react-hook-form';
 import AxiosInstance from '../Axios';
+import { FormHelperText } from '@mui/material';
 
 export default function MySelectFieldPM(props) {
     const {label,width,  name, control}= props
@@ -35,8 +36,7 @@ useEffect(()=>{
   return (
     <>
       {loading?<p>loading the pm coming</p>:
-      <FormControl variant="standard" sx={ {width:{width}} }>
-        <InputLabel id="demo-simple-select-filled-label">{label}</InputLabel>
+      
 
         <Controller
             name = {name}
@@ -44,12 +44,16 @@ useEffect(()=>{
         
             render={
               ({field : {onChange , value }, fieldState: {error}, formState,}) => (
+                <FormControl variant="standard" sx={ {width:{width}} }>
+        <InputLabel id="demo-simple-select-filled-label">{label}</InputLabel>
         
                  <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
           onChange={onChange}
             value={value}
+            error = {!!error}
+            
         >
           <MenuItem value="">
             <em>None</em>
@@ -62,8 +66,9 @@ useEffect(()=>{
           }
           
         </Select>
+        <FormHelperText sx={{color:"#d32f2f"}} >{error?.message}</FormHelperText>
         
-        
+        </FormControl>
       )
     }
             >
@@ -72,7 +77,7 @@ useEffect(()=>{
                    </Controller>
 
         
-      </FormControl>}
+      }
    
     </>
   );
