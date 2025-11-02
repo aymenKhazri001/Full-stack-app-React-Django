@@ -11,17 +11,19 @@ import Dayjs from 'dayjs'
 import {useNavigate} from 'react-router-dom'
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from 'yup'
+import MultipleSelectField from './forms/MyMultiSelectField'
+import MyMultiSelectField from './forms/MyMultiSelectField'
 function Create() {
 
 
 
- const [projectManager, setProjectManager]  = useState()
+ const [employees, setEmpoyees]  = useState()
   const [loading, setLoading]  = useState(true)
 
 
   const GetData = ()=>{
-    AxiosInstance.get(`project_manager/`).then((res)=>{
-      setProjectManager(res.data)
+    AxiosInstance.get(`employees/`).then((res)=>{
+      setEmpoyees(res.data)
       setLoading(false)
     })
  
@@ -52,6 +54,7 @@ const defaultValues = {
 const schema  = yup.object({
   name : yup.string().required('Name is required field'),
   comments : yup.string(),
+  employees : yup.array().min(1,'Pick at least one option from the select field'),
   project_manager : yup.string().required('project manager is required'),
   status : yup.string().required('Status is required field'),
   start_date : yup.date().required('Start date is required field'),
@@ -71,6 +74,7 @@ const schema  = yup.object({
           comments : data.comments,
           status : data.status,
           project_manager   : data.project_manager,
+          employees : data.employees,
           start_date : StartDate,
           end_date : EndDate,
         }
@@ -147,7 +151,19 @@ const schema  = yup.object({
 
 
         </Box>
-            <Box sx={{display:"flex", justifyContent:"center", marginTop : '40px' } } >
+        <Box  sx={{display:"flex", justifyContent:"space-around", marginTop:'40px'}}  >
+          <MyMultiSelectField
+           options={employees}
+           label = 'Employees'
+           name='employees'
+           control={control}
+            width='30%'
+           
+           >
+            
+          </MyMultiSelectField>
+        </Box>
+            <Box sx={{display:"flex", justifyContent:"start", marginTop : '40px' } } >
               <Button variant="contained" type='submit' sx={{width:"30%"}} >
                 Submit
               </Button>

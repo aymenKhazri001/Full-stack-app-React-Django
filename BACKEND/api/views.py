@@ -81,3 +81,38 @@ class ProjectManagerViewset(viewsets.ViewSet):
         project_manager = self.queryset.get(pk=pk)
         project_manager.delete()
         return Response(status =204 )
+    
+class EmployeesViewset(viewsets.ViewSet):
+    permission_classes = [permissions.AllowAny]
+    queryset = Employees.objects.all()
+    serializer_class = EmployeesSerializer
+
+
+    def list(self, request):
+        queryset  = Employees.objects.all()
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid(): 
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=400)
+    def retrieve(self, request, pk=None):
+        project_manager = self.queryset.get(pk=pk)
+        serializer = self.serializer_class(project_manager)
+        return Response(serializer.data)
+    def update(self, request, pk=None):
+        project_manager = self.queryset.get(pk=pk)
+        serializer = self.serializer_class(project_manager, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=400)
+
+    def destroy(self, request, pk=None):
+        project_manager = self.queryset.get(pk=pk)
+        project_manager.delete()
+        return Response(status =204 )

@@ -9,6 +9,14 @@ class ProjectManager(models.Model):
     def __str__(self):
         return self.name
 
+class Employees(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    modified = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
 class Project(models.Model):
     name = models.CharField(unique=True, max_length=100)
     start_date = models.DateField()
@@ -18,6 +26,7 @@ class Project(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     project_manager = models.ForeignKey(ProjectManager, on_delete=models.CASCADE, related_name='projects' , blank=True, null=True)
+    employees = models.ManyToManyField(Employees,related_name='projects')
 
     def __str__(self):
         return self.name

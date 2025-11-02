@@ -9,9 +9,36 @@ import { useForm } from 'react-hook-form'
 import AxiosInstance from './Axios'
 import Dayjs from 'dayjs'
 import {useNavigate, useParams} from 'react-router-dom'
- 
+import MyMultiSelectField from './forms/MyMultiSelectField' 
 
 function Edit() {
+
+const [employees, setEmpoyees]  = useState()
+
+
+
+  const GetEmployees = ()=>{
+    AxiosInstance.get(`employees/`).then((res)=>{
+      setEmpoyees(res.data)
+    
+    })
+ 
+ 
+  }
+
+useEffect(()=>{
+  GetEmployees()
+},[])
+
+
+
+
+
+
+
+
+
+
 const MyParam = useParams()
 console.log(MyParam)
 const MyId = MyParam.id
@@ -23,6 +50,7 @@ const GetData = ()=>{
       setValue('name', res.data.name)
       setValue('status', res.data.status)
       setValue('comments', res.data.comments)
+      setValue('employees',res.data.employees)
       setValue('project_manager', res.data.project_manager)
       setValue('start_date', Dayjs(res.data.start_date))
       setValue('end_date', Dayjs(res.data.end_date))
@@ -50,6 +78,7 @@ const defaultValues = {
           name : data.name,
           comments : data.comments,
           status : data.status,
+          employees : data.employees,
           project_manager : data.project_manager,
           start_date : StartDate,
           end_date : EndDate,
@@ -125,7 +154,19 @@ const defaultValues = {
 
 
         </Box>
-           <Box sx={{display:"flex", justifyContent:"center", marginTop : '40px' } } >
+         <Box  sx={{display:"flex", justifyContent:"space-around", marginTop:'40px'}}  >
+                  <MyMultiSelectField
+                   options={employees}
+                   label = 'Employees'
+                   name='employees'
+                   control={control}
+                    width='30%'
+                   
+                   >
+                    
+                  </MyMultiSelectField>
+                </Box>
+           <Box sx={{display:"flex", justifyContent:"start", marginTop : '40px' } } >
               <Button variant="contained" type='submit' sx={{width:"30%"}} >
                 Submit
               </Button>
